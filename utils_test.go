@@ -15,7 +15,7 @@ var (
 )
 
 func mustOpen(filename string) image.Image {
-	img, err := Open(filename)
+	img, _, err := Open(filename)
 	if err != nil {
 		panic(err)
 	}

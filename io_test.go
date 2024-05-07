@@ -113,7 +113,7 @@ func TestOpenSave(t *testing.T) {
 				t.Fatalf("failed to save image (%q): %v", filename, err)
 			}
 
-			img2, err := Open(filename)
+			img2, _, err := Open(filename)
 			if err != nil {
 				t.Fatalf("failed to open image (%q): %v", filename, err)
 			}
@@ -143,7 +143,7 @@ func TestOpenSave(t *testing.T) {
 	}
 
 	buf = bytes.NewBuffer([]byte("bad data"))
-	_, err = Decode(buf)
+	_, _, err = Decode(buf)
 	if err == nil {
 		t.Fatalf("decoding bad data: expected error got nil")
 	}
@@ -167,7 +167,7 @@ func TestOpenSave(t *testing.T) {
 		t.Fatalf("got error %v want errClose", err)
 	}
 
-	_, err = Open("test.jpg")
+	_, _, err = Open("test.jpg")
 	if err != errOpen {
 		t.Fatalf("got error %v want errOpen", err)
 	}
@@ -416,7 +416,7 @@ func TestAutoOrientation(t *testing.T) {
 		{"testdata/orientation_8.jpg"},
 	}
 	for _, tc := range testCases {
-		img, err := Open(tc.path, AutoOrientation(true))
+		img, _, err := Open(tc.path, AutoOrientation(true))
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -429,7 +429,7 @@ func TestAutoOrientation(t *testing.T) {
 		}
 	}
 
-	if _, err := Decode(strings.NewReader("invalid data"), AutoOrientation(true)); err == nil {
+	if _, _, err := Decode(strings.NewReader("invalid data"), AutoOrientation(true)); err == nil {
 		t.Fatal("expected error got nil")
 	}
 }

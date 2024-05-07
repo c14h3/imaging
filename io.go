@@ -51,7 +51,7 @@ func AutoOrientation(enabled bool) DecodeOption {
 }
 
 // Decode reads an image from r.
-func Decode(r io.Reader, opts ...DecodeOption) (image.Image, error) {
+func Decode(r io.Reader, opts ...DecodeOption) (image.Image, string, error) {
 	cfg := defaultDecodeConfig
 	for _, option := range opts {
 		option(&cfg)
@@ -59,7 +59,7 @@ func Decode(r io.Reader, opts ...DecodeOption) (image.Image, error) {
 
 	if !cfg.autoOrientation {
 		img, _, err := image.Decode(r)
-		return img, err
+		return img, "", err
 	}
 
 	var orient orientation
@@ -72,14 +72,14 @@ func Decode(r io.Reader, opts ...DecodeOption) (image.Image, error) {
 		io.Copy(ioutil.Discard, pr)
 	}()
 
-	img, _, err := image.Decode(r)
+	img, imgType, err := image.Decode(r)
 	pw.Close()
 	<-done
 	if err != nil {
-		return nil, err
+		return nil, "", err
 	}
 
-	return fixOrientation(img, orient), nil
+	return fixOrientation(img, orient), imgType, nil
 }
 
 // Open loads an image from file.
@@ -91,11 +91,10 @@ func Decode(r io.Reader, opts ...DecodeOption) (image.Image, error) {
 //
 //	// Load an image and transform it depending on the EXIF orientation tag (if present).
 //	img, err := imaging.Open("test.jpg", imaging.AutoOrientation(true))
-//
-func Open(filename string, opts ...DecodeOption) (image.Image, error) {
+func Open(filename string, opts ...DecodeOption) (image.Image, string, error) {
 	file, err := fs.Open(filename)
 	if err != nil {
-		return nil, err
+		return nil, "", err
 	}
 	defer file.Close()
 	return Decode(file, opts...)
@@ -264,7 +263,6 @@ func Encode(w io.Writer, img image.Image, format Format, opts ...EncodeOption) e
 //
 //	// Save the image as JPEG with optional quality parameter set to 80.
 //	err := imaging.Save(img, "out.jpg", imaging.JPEGQuality(80))
-//
 func Save(img image.Image, filename string, opts ...EncodeOption) (err error) {
 	f, err := FormatFromFilename(filename)
 	if err != nil {

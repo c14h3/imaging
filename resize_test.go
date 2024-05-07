@@ -250,7 +250,7 @@ func TestResizeGolden(t *testing.T) {
 		"out_resize_lanczos.png": Lanczos,
 	} {
 		got := Resize(testdataBranchesPNG, 150, 0, filter)
-		want, err := Open("testdata/" + name)
+		want, _, err := Open("testdata/" + name)
 		if err != nil {
 			t.Fatalf("failed to open image: %v", err)
 		}
@@ -378,7 +378,7 @@ func TestFit(t *testing.T) {
 func TestFitGolden(t *testing.T) {
 	got := Fit(testdataBranchesPNG, 150, 150, Box)
 	name := filepath.Join("testdata", "out_fit.png")
-	want, err := Open(name)
+	want, _, err := Open(name)
 	if err != nil {
 		t.Fatalf("failed to open image: %v", err)
 	}
@@ -483,7 +483,7 @@ func TestFillGolden(t *testing.T) {
 	for apName, ap := range anchorPoints {
 		got := Fill(testdataBranchesPNG, 150, 150, ap, Box)
 		name := filepath.Join("testdata", "out_fill_"+apName+".png")
-		want, err := Open(name)
+		want, _, err := Open(name)
 		if err != nil {
 			t.Fatalf("failed to open image: %v", err)
 		}

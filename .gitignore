@@ -1,0 +1,14 @@
+*.orig
+*.http
+.idea/*
+.run/*
+bin/*
+run/*
+.coverage.txt
+
+# macOS
+.DS_Store
+
+# vscode
+.vscode
+__debug_bin

@@ -1,9 +1,9 @@
 # Imaging
 
-[![PkgGoDev](https://pkg.go.dev/badge/github.com/disintegration/imaging)](https://pkg.go.dev/github.com/disintegration/imaging)
-[![Build Status](https://travis-ci.org/disintegration/imaging.svg?branch=master)](https://travis-ci.org/disintegration/imaging)
-[![Coverage Status](https://coveralls.io/repos/github/disintegration/imaging/badge.svg?branch=master&service=github)](https://coveralls.io/github/disintegration/imaging?branch=master)
-[![Go Report Card](https://goreportcard.com/badge/github.com/disintegration/imaging)](https://goreportcard.com/report/github.com/disintegration/imaging)
+[![PkgGoDev](https://pkg.go.dev/badge/github.com/c14h3/imaging)](https://pkg.go.dev/github.com/c14h3/imaging)
+[![Build Status](https://travis-ci.org/c14h3/imaging.svg?branch=master)](https://travis-ci.org/c14h3/imaging)
+[![Coverage Status](https://coveralls.io/repos/github/c14h3/imaging/badge.svg?branch=master&service=github)](https://coveralls.io/github/c14h3/imaging?branch=master)
+[![Go Report Card](https://goreportcard.com/badge/github.com/c14h3/imaging)](https://goreportcard.com/report/github.com/c14h3/imaging)
 
 Package imaging provides basic image processing functions (resize, rotate, crop, brightness/contrast adjustments, etc.).
 
@@ -12,11 +12,11 @@ as an input, and return a new image of `*image.NRGBA` type (32bit RGBA colors, n
 
 ## Installation
 
-    go get -u github.com/disintegration/imaging
+    go get -u github.com/c14h3/imaging
 
 ## Documentation
 
-https://pkg.go.dev/github.com/disintegration/imaging
+https://pkg.go.dev/github.com/c14h3/imaging
 
 ## Usage examples
 
@@ -156,13 +156,13 @@ img, err := imaging.Open("test.jpg", imaging.AutoOrientation(true))
 
 ### What's the difference between `imaging` and `gift` packages?
 
-[imaging](https://github.com/disintegration/imaging)
+[imaging](https://github.com/c14h3/imaging)
 is designed to be a lightweight and simple image manipulation package.
 It provides basic image processing functions and a few helper functions
 such as `Open` and `Save`. It consistently returns *image.NRGBA image 
 type (8 bits per channel, RGBA).
 
-[gift](https://github.com/disintegration/gift)
+[gift](https://github.com/c14h3/gift)
 supports more advanced image processing, for example, sRGB/Linear color
 space conversions. It also supports different output image types
 (e.g. 16 bits per channel) and provides easy-to-use API for chaining
@@ -178,12 +178,12 @@ import (
 	"image/color"
 	"log"
 
-	"github.com/disintegration/imaging"
+	"github.com/c14h3/imaging"
 )
 
 func main() {
 	// Open a test image.
-	src, err := imaging.Open("testdata/flowers.png")
+	src, _, err := imaging.Open("testdata/flowers.png")
 	if err != nil {
 		log.Fatalf("failed to open image: %v", err)
 	}

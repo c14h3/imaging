@@ -95,7 +95,7 @@ func TestBlurGolden(t *testing.T) {
 		"out_blur_1.5.png": 1.5,
 	} {
 		got := Blur(testdataFlowersSmallPNG, sigma)
-		want, err := Open("testdata/" + name)
+		want, _, err := Open("testdata/" + name)
 		if err != nil {
 			t.Fatalf("failed to open image: %v", err)
 		}
@@ -220,7 +220,7 @@ func TestSharpenGolden(t *testing.T) {
 		"out_sharpen_1.5.png": 1.5,
 	} {
 		got := Sharpen(testdataFlowersSmallPNG, sigma)
-		want, err := Open("testdata/" + name)
+		want, _, err := Open("testdata/" + name)
 		if err != nil {
 			t.Fatalf("failed to open image: %v", err)
 		}

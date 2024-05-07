@@ -227,3 +227,10 @@ func readColumn(img image.Image, x int) []uint8 {
 	}
 	return column
 }
+
+func TestMaliciouslyConstructedGraph(t *testing.T) {
+	t.Run("poc.tiff", func(t *testing.T) {
+		src, _, _ := Open("testdata/poc.tiff")
+		Grayscale(src)
+	})
+}

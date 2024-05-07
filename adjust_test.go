@@ -230,7 +230,7 @@ func TestAdjustSaturationGolden(t *testing.T) {
 		"out_saturation_p30.png": 30,
 	} {
 		got := AdjustSaturation(testdataFlowersSmallPNG, p)
-		want, err := Open("testdata/" + name)
+		want, _, err := Open("testdata/" + name)
 		if err != nil {
 			t.Fatalf("failed to open image: %v", err)
 		}
@@ -517,7 +517,7 @@ func TestAdjustHueGolden(t *testing.T) {
 		"out_hue_p480.png": 480,
 	} {
 		got := AdjustHue(testdataFlowersSmallPNG, p)
-		want, err := Open("testdata/" + name)
+		want, _, err := Open("testdata/" + name)
 		if err != nil {
 			t.Fatalf("failed to open image: %v", err)
 		}
@@ -668,7 +668,7 @@ func TestAdjustContrastGolden(t *testing.T) {
 		"out_contrast_p15.png": 15,
 	} {
 		got := AdjustContrast(testdataFlowersSmallPNG, p)
-		want, err := Open("testdata/" + name)
+		want, _, err := Open("testdata/" + name)
 		if err != nil {
 			t.Fatalf("failed to open image: %v", err)
 		}
@@ -819,7 +819,7 @@ func TestAdjustBrightnessGolden(t *testing.T) {
 		"out_brightness_p10.png": 10,
 	} {
 		got := AdjustBrightness(testdataFlowersSmallPNG, p)
-		want, err := Open("testdata/" + name)
+		want, _, err := Open("testdata/" + name)
 		if err != nil {
 			t.Fatalf("failed to open image: %v", err)
 		}
@@ -926,7 +926,7 @@ func TestAdjustGammaGolden(t *testing.T) {
 		"out_gamma_1.25.png": 1.25,
 	} {
 		got := AdjustGamma(testdataFlowersSmallPNG, g)
-		want, err := Open("testdata/" + name)
+		want, _, err := Open("testdata/" + name)
 		if err != nil {
 			t.Fatalf("failed to open image: %v", err)
 		}
